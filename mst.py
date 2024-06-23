@@ -17,6 +17,8 @@ from typing import TypeVar, List, Optional
 from weighted_graph import WeightedGraph
 from weighted_edge import WeightedEdge
 from priority_queue import PriorityQueue
+import parse_csv as pc
+import distance as dis
 
 V = TypeVar('V') # type of the vertices in the graph
 WeightedPath = List[WeightedEdge] # type alias for paths
@@ -60,7 +62,7 @@ def print_weighted_path(wg: WeightedGraph, wp: WeightedPath) -> None:
 
 
 if __name__ == "__main__":
-    city_graph2: WeightedGraph[str] = WeightedGraph(["Seattle", "San Francisco", "Los Angeles", "Riverside", "Phoenix", "Chicago", "Boston", "New York", "Atlanta", "Miami", "Dallas", "Houston", "Detroit", "Philadelphia", "Washington"])
+    """city_graph2: WeightedGraph[str] = WeightedGraph(["Seattle", "San Francisco", "Los Angeles", "Riverside", "Phoenix", "Chicago", "Boston", "New York", "Atlanta", "Miami", "Dallas", "Houston", "Detroit", "Philadelphia", "Washington"])
 
     city_graph2.add_edge_by_vertices("Seattle", "Chicago", 1737)
     city_graph2.add_edge_by_vertices("Seattle", "San Francisco", 678)
@@ -87,7 +89,16 @@ if __name__ == "__main__":
     city_graph2.add_edge_by_vertices("Detroit", "New York", 482)
     city_graph2.add_edge_by_vertices("Boston", "New York", 190)
     city_graph2.add_edge_by_vertices("New York", "Philadelphia", 81)
-    city_graph2.add_edge_by_vertices("Philadelphia", "Washington", 123)
+    city_graph2.add_edge_by_vertices("Philadelphia", "Washington", 123)"""
+
+    city_graph2: WeightedGraph[str] = WeightedGraph([str(i) for i in range(538)])
+
+    graph = pc.parse_csv()
+    dist = dis.get_distance_list()
+    for i in range(len(graph)):
+        fro = graph[i].get('from')
+        to = graph[i].get('to')
+        city_graph2.add_edge_by_vertices(str(fro), str(to), dist[i])
 
     result: Optional[WeightedPath] = mst(city_graph2)
     if result is None:

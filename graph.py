@@ -15,6 +15,8 @@
 # limitations under the License.
 from typing import TypeVar, Generic, List, Optional
 from edge import Edge
+import parse_csv as pc
+
 
 
 V = TypeVar('V') # type of the vertices in the graph
@@ -91,7 +93,7 @@ class Graph(Generic[V]):
 
 
 if __name__ == "__main__":
-    # test basic Graph construction
+    """"# test basic Graph construction
     city_graph: Graph[str] = Graph(["Seattle", "San Francisco", "Los Angeles", "Riverside", "Phoenix", "Chicago", "Boston", "New York", "Atlanta", "Miami", "Dallas", "Houston", "Detroit", "Philadelphia", "Washington"])
     city_graph.add_edge_by_vertices("Seattle", "Chicago")
     city_graph.add_edge_by_vertices("Seattle", "San Francisco")
@@ -119,7 +121,17 @@ if __name__ == "__main__":
     city_graph.add_edge_by_vertices("Boston", "New York")
     city_graph.add_edge_by_vertices("New York", "Philadelphia")
     city_graph.add_edge_by_vertices("Philadelphia", "Washington")
+    print(city_graph)"""
+
+    city_graph: Graph[str] = Graph([str(i) for i in range(538)])
+
+    graph = pc.parse_csv()
+    for i in range(len(graph)):
+        fro = graph[i].get('from')
+        to = graph[i].get('to')
+        city_graph.add_edge_by_vertices(str(fro), str(to))
     print(city_graph)
+
 
     # Reuse BFS from Chapter 2 on city_graph
     import sys

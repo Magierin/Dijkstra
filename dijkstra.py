@@ -119,7 +119,7 @@ def path_dict_to_path(start: int, end: int, path_dict: Dict[int, WeightedEdge]) 
 #     city_graph2.add_edge_by_vertices("New York", "Philadelphia", 81)
 #     city_graph2.add_edge_by_vertices("Philadelphia", "Washington", 123)
 #
-#     distances, path_dict = dijkstra(city_graph2, "Los Angeles")
+#     distances, path_dict = dijkstra(city_graph2, "Los Ang eles")
 #     name_distance: Dict[str, Optional[int]] = distance_array_to_vertex_dict(city_graph2, distances)
 #     print("Distances from Los Angeles:")
 #     for key, value in name_distance.items():
@@ -132,14 +132,14 @@ def path_dict_to_path(start: int, end: int, path_dict: Dict[int, WeightedEdge]) 
 #
 
 if __name__ == "__main__":
-    city_graph2: WeightedGraph[str] = WeightedGraph([str(i) for i in range(1, 539)])
+    city_graph2: WeightedGraph[str] = WeightedGraph([str(i) for i in range(538)])
 
     graph = pc.parse_csv()
     dist = dis.get_distance_list()
-    for i in range(len(graph)):
+    for i in range(1, len(graph)):
         fro = graph[i].get('from')
         to = graph[i].get('to')
-        city_graph2.add_edge_by_vertices(str(fro), str(to), dist[i])  #Anfang, Ende, Gewichtung
+        city_graph2.add_edge_by_vertices(str(fro), str(to), dist[i-1])  #Anfang, Ende, Gewichtung
 
     distances, path_dict = dijkstra(city_graph2, "94")
     name_distance: Dict[str, Optional[int]] = distance_array_to_vertex_dict(city_graph2, distances)
@@ -149,5 +149,5 @@ if __name__ == "__main__":
     print("") # blank line
 
     print("Shortest path from 94 to 162:")
-    path: WeightedPath = path_dict_to_path(city_graph2.index_of("92"), city_graph2.index_of("162"), path_dict)
+    path: WeightedPath = path_dict_to_path(city_graph2.index_of("94"), city_graph2.index_of("162"), path_dict)
     print_weighted_path(city_graph2, path)
