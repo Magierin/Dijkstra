@@ -99,7 +99,7 @@ if __name__ == "__main__":
         fro = graph[i].get('from')
         to = graph[i].get('to')
         # city_graph2.add_edge_by_vertices(str(fro), str(to), dist[i-1])  #Anfang, Ende, Gewichtung
-        city_graph2.add_edge_by_vertices(str(fro), str(to), dur.get_edges_duration()[i-1])
+        city_graph2.add_edge_by_vertices(str(fro), str(to), dur.get_edges_predicted_duration()[i-1])
 
     distances, path_dict = dijkstra(city_graph2, "94")
     name_distance: Dict[str, Optional[int]] = distance_array_to_vertex_dict(city_graph2, distances)
