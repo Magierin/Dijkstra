@@ -62,7 +62,7 @@ if __name__ == "__main__":
         to = graph[i].get('to')
         city_graph2.add_edge_by_vertices(str(fro), str(to), dist[i])"""
 
-
+'''
     graph = pc.parse_csv()
     # dist = dis.get_distance_list()
     for i in range(1, len(graph)):
@@ -72,3 +72,4 @@ if __name__ == "__main__":
         city_graph2.add_edge_by_vertices(str(fro), str(to), dur.get_edges_duration()[i])
 
     print(city_graph2)
+'''

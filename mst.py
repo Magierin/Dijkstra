@@ -20,6 +20,8 @@ from priority_queue import PriorityQueue
 import parse_csv as pc
 import distance as dis
 import duration as dur
+import connection as con
+import get_predicted_duration_new as gpd
 
 V = TypeVar('V') # type of the vertices in the graph
 WeightedPath = List[WeightedEdge] # type alias for paths
@@ -56,9 +58,25 @@ def mst(wg: WeightedGraph[V], start: int = 0) -> Optional[WeightedPath]:
     return result
 
 
+def get_route_duration(ls):
+    data = gpd.get_edges_predicted_duration_new(1)
+    summe = 0
+    for i in range(len(ls)-1):
+        dic = con.get_connection(str(ls[i]), str(ls[i+1]))
+        num = dic.get("number")
+        summe += float(data[int(num)])
+    t = float(round((round(summe, 2) - int(round(summe, 2))) * 60)) / 100 + int(round(summe, 2))
+    return t
+
+
 def print_weighted_path(wg: WeightedGraph, wp: WeightedPath) -> None:
+    route = []
     for edge in wp:
         print(f"{wg.vertex_at(edge.u)} {edge.weight}> {wg.vertex_at(edge.v)}")
+        route.append(str(wg.vertex_at(edge.u)))
+    route.append('162')
+    print("Path: ", route)
+    print("Path Total weight: ", get_route_duration(route))
     print(f"Total Weight: {total_weight(wp)}")
 
 
