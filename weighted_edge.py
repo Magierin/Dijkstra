@@ -22,9 +22,6 @@ from edge import Edge
 class WeightedEdge(Edge):
     weight: float
 
-    def reversed(self) -> WeightedEdge:
-        return WeightedEdge(self.v, self.u, self.weight)
-
     # so that we can order edges by weight to find the minimum weight edge
     def __lt__(self, other: WeightedEdge) -> bool:
         return self.weight < other.weight

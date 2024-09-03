@@ -16,11 +16,8 @@
 from typing import TypeVar, Generic, List, Tuple, Optional
 from graph import Graph
 from weighted_edge import WeightedEdge
-import parse_csv as pc
-import distance as dis
-import duration as dur
 
-V = TypeVar('V') # type of the vertices in the graph
+V = TypeVar('V')  # type of the vertices in the graph
 
 
 class WeightedGraph(Generic[V], Graph[V]):
@@ -50,26 +47,3 @@ class WeightedGraph(Generic[V], Graph[V]):
         for i in range(self.vertex_count):
             desc += f"{self.vertex_at(i)} -> {self.neighbors_for_index_with_weights(i)}\n"
         return desc
-
-
-if __name__ == "__main__":
-    city_graph2: WeightedGraph[str] = WeightedGraph([str(i) for i in range(538)])
-
-    """graph = pc.parse_csv()
-    dist = dis.get_distance_list()
-    for i in range(len(graph)):
-        fro = graph[i].get('from')
-        to = graph[i].get('to')
-        city_graph2.add_edge_by_vertices(str(fro), str(to), dist[i])"""
-
-'''
-    graph = pc.parse_csv()
-    # dist = dis.get_distance_list()
-    for i in range(1, len(graph)):
-        fro = graph[i].get('from')
-        to = graph[i].get('to')
-        # city_graph2.add_edge_by_vertices(str(fro), str(to), dist[i-1])  #Anfang, Ende, Gewichtung
-        city_graph2.add_edge_by_vertices(str(fro), str(to), dur.get_edges_duration()[i])
-
-    print(city_graph2)
-'''
