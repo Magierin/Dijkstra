@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from typing import TypeVar, List, Optional
-import test
+import duration as dur
 from weighted_graph import WeightedGraph
 from weighted_edge import WeightedEdge
 from priority_queue import PriorityQueue
@@ -56,8 +56,11 @@ def mst(wg: WeightedGraph[V], start: int = 0) -> Optional[WeightedPath]:
     return result
 
 
+'''Returns the duration of the dijkstra computed route; Input: (['94', '209', ...], '28 Mar 00_09_27')'''
+
+
 def get_route_duration(ls, timestamp):
-    data = test.get_edges_predicted_duration_new(timestamp)
+    data = dur.get_edges_predicted_duration_new(timestamp)
     summe = 0
     for i in range(len(ls)-1):
         dic = con.get_connection(str(ls[i]), str(ls[i+1]))
@@ -72,6 +75,6 @@ def print_weighted_path(wg: WeightedGraph, wp: WeightedPath, timestamp):
     for edge in wp:
         route.append(str(wg.vertex_at(edge.u)))
     route.append('162')
-    print("Path: ", route)
-    print("Total Weight in minutes: ", get_route_duration(route, timestamp))
-    return route
+    print("Route: ", route)
+    print("Total Duration In Minutes: ", get_route_duration(route, timestamp))
+    return get_route_duration(route, timestamp)
